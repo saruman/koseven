@@ -66,6 +66,14 @@ class Kohana_Database_MySQLi extends Database {
 			{
 				$this->_connection = new mysqli($hostname, $username, $password, $database, $port, $socket);
 			}
+
+			if ( ! empty($this->_config['connection']['options']))
+			{
+				foreach($this->_config['connection']['options'] as $option => $value)
+				{
+					$this->_connection->options($option, $value);
+				}
+			}
 		}
 		catch (Exception $e)
 		{
